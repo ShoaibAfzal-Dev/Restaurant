@@ -1,0 +1,30 @@
+﻿@model Order_Types;
+
+<h1 style="text-align:center;color:white">Order Types</h1>
+
+<div class="col-md-4 registerdata">
+    <div style="color:red">@ViewBag.Error</div>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" id="Id" name="Id" value="@ViewBag.Urlid">
+        <input type="hidden" id="Orderid" name="Orderid" value="@ViewBag.Id">
+        <div class="form-group">
+            <label asp-for=@Model.Name class="control-label">Name</label>
+            <input placeholder="Name" id="Name" asp-for=@Model.Name class="form-control" />
+            <span asp-validation-for=@Model.Name class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for=@Model.PlusPrice class="control-label">PlusPrice</label>
+            <input placeholder="PlusPrice" id="PlusPrice" asp-for=@Model.PlusPrice class="form-control" />
+            <span asp-validation-for=@Model.PlusPrice class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for=@Model.Count class="control-label">Count</label>
+            <input placeholder="Count" id="Count" asp-for=@Model.Count class="form-control" />
+            <span asp-validation-for=@Model.Count class="text-danger"></span>
+        </div>
+        <input class="btn btn-danger btn-sm ms-lg-2"
+               asp-action="AddSubTypes" asp-controller="Data"
+        type="submit" value="Submit" />
+    </form>
+</div>

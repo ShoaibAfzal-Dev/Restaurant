@@ -1,0 +1,71 @@
+﻿@model List<MVC.Models.Order_data>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int d = 1;
+}
+
+<div class="text-danger container mt-5">
+    <h2 >Orders</h2>
+    <h1>@ViewBag.Success</h1>
+
+    @foreach (var order in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Order ID: @d
+            </div>
+         
+            <div class="card-body">
+                <h5 class="card-title">@order.item</h5>
+                <p class="card-text text-black">Price: $@order.price, Quantity: @order.quantity</p>
+
+                @if (!string.IsNullOrEmpty(order.instructions))
+                {
+                    <p class="card-text">Instructions: @order.instructions</p>
+                }
+
+                <h6 class="card-subtitle mb-2 text-danger">Sub Details:</h6>
+                <ul class="list-group">
+                    @foreach (var subDetail in order.sub_details)
+                    {
+                        <li class="list-group-item">
+                            @subDetail.details - $@subDetail.price
+                        </li>
+                    }
+                </ul>
+
+                <h6 class="card-subtitle mb-2 mt-3 text-danger">User Details:</h6>
+                <ul class="list-group">
+                    @foreach (var userDetails in order.User_Details)
+                    {
+                        @if (userDetails.Card)
+                        {
+                            <li class="list-group-item">
+                                @userDetails.FirstName @userDetails.LastName
+                                - Email: @userDetails.Email, Phone: @userDetails.Phone, Payment: Card
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="list-group-item">
+                                @userDetails.FirstName @userDetails.LastName
+                                - Email: @userDetails.Email, Phone:
+                                @userDetails.Phone, Payment: Cash
+                            </li>
+                        }
+                    }
+                </ul>
+                @if(order.OrderStatus!=true){ 
+                <a class="btn btn-danger m-1" href="@Url.Action("Verification_Mail", "Data", new { id = order.id })"
+                    data-id="@order.id">Send Verification Mail</a>
+                 }
+                else
+                {
+                    <p class="btn btn-info m-1">Already send Mail</p>
+                } 
+            </div>
+        </div>
+        d++;
+    }
+</div>

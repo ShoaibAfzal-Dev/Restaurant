@@ -1,0 +1,18 @@
+﻿@model Main_Order;
+
+<h1 style="text-align:center;color:white">New Orders</h1>
+
+<div class="col-md-4 registerdata">
+    <div style="color:red">@ViewBag.Error</div>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" id="ProductId" name="ProductId" value="@ViewBag.id">
+        <div class="form-group">
+            <label asp-for=@Model.Name class="control-label">Name</label>
+            <input placeholder="Name" id="Name" asp-for=@Model.Name class="form-control" />
+            <span asp-validation-for=@Model.Name class="text-danger"></span>
+        </div>
+        
+        <input class="btn btn-danger ms-lg-2" asp-action="PostData" asp-controller="Data" type="submit" value="Submit" />
+    </form>
+</div>

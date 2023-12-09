@@ -1,0 +1,25 @@
+﻿@model Category;
+
+<h1 style="text-align:center;color:white">Category</h1>
+
+<div class="col-md-4 registerdata">
+    <div style="color:red">@ViewBag.Error</div>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for=@Model.Name class="control-label p-1">Name</label>
+            <input placeholder="Name" id="Name" asp-for=@Model.Name 
+            class="form-control" />
+            <span asp-validation-for=@Model.Name class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for=@Model.Description class="control-label p-1">
+                Description</label>
+            <input placeholder="Description" id="Description" 
+                asp-for=@Model.Description class="form-control" />
+            <span asp-validation-for=@Model.Description class="text-danger"></span>
+        </div>
+        <input class="btn btn-danger btn-sm ms-lg-2" asp-action="AddCategory" asp-controller="Data"
+               type="submit" value="Submit" />
+    </form>
+</div>

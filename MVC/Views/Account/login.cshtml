@@ -1,0 +1,21 @@
+﻿@model Login;
+
+<h1 style="text-align:center;color:white">Login</h1>
+
+<div class="col-md-4 registerdata">
+    <div style="color:red">@ViewBag.error</div>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for=@Model.userName class="control-label">Name</label>
+            <input placeholder="Name" id="Name" asp-for=@Model.userName class="form-control" />
+            <span asp-validation-for=@Model.userName class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for=@Model.Password class="control-label">Password</label>
+            <input placeholder="Password" id="Price" asp-for=@Model.Password class="form-control" />
+            <span asp-validation-for=@Model.Password class="text-danger"></span>
+        </div>
+        <input class="btn btn-danger btn-sm ms-lg-2" asp-action="Login" asp-controller="Account" type="submit" value="Submit" />
+    </form>
+</div>

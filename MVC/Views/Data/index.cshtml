@@ -1,0 +1,25 @@
+﻿@model List<Category>;
+
+<div class="text-center">
+    <a asp-action="Category" class="btn btn-light m-2">
+        Create Category
+        </a>
+    <button  class="btn btn-light m-2 first">
+            View Orders
+    </button>
+    <a asp-action="OrdersData" class="btn btn-light m-2">
+        View Orders
+    </a>
+    <button class="btn btn-light m-2 third">
+        View third
+    </button>
+</div>
+
+<div class="partialViews">
+    <Partial name="_FirstPartial" model="@Model" />
+    <Partial name="_SecondPartial" />
+    <Partial name="_ThirdPartial" />
+</div>
+@section scripts{
+    <script src="~/js/adminpage.js"></script>
+}

@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MVC.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <a class="sdfdfdf" asp-action="index" asp-controller="home"><img src="~/images/icons8-left-48.png"/></a>
+     <div class="pagee">
+        <div class="orsder-page">
+            <div class="main-page">
+                <nav class="nav-link  nav-barfu justify-content-center navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark ">
+                    <div class="container-fluid">
+                        <h3 style="color:white">TASTING HOUSE</h3>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                            <ul style="display:flex;justify-content:end;align-items:end"
+                                class="navbar-nav flex-grow-1">
+                                <li class="nav-item list-boder">
+                                    <a asp-action="index"><img src="~/images/icons8-restaurant-64.png" /></a>
+                                </li>
+                                <li class="nav-item list-boder">
+                                    <a asp-action="Info">  <img src="~/images/icons8-info-64.png" /></a>
+                                </li>
+                                <li class="nav-item list-boder">
+                                    <a asp-action="Cart">  <img src="~/images/icons8-cart-64.png" /></a>
+                                </li>  
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="main-order-page">
+            @RenderBody()
+        </div>
+    </div>
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/
+    toastr.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

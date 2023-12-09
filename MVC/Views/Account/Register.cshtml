@@ -1,0 +1,31 @@
+﻿@model Register;
+
+<h1 style="text-align:center;color:white">Registration</h1>
+
+<div class="col-md-4 registerdata">
+    <div style="color:red">@ViewBag.error</div>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for=@Model.UserName class="control-label">Name</label>
+            <input placeholder="Name" id="Name" asp-for=@Model.UserName class="form-control" />
+            <span asp-validation-for=@Model.UserName class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for=@Model.Email class="control-label">Email</label>
+            <input placeholder="E-mail" id="Category" asp-for=@Model.Email class="form-control" />
+            <span asp-validation-for=@Model.Email class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for=@Model.Password class="control-label">Password</label>
+            <input placeholder="Password" id="Price" asp-for=@Model.Password class="form-control" />
+            <span asp-validation-for=@Model.Password class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for=@Model.ConfirmPassword class="control-label">ConfirmPassword</label>
+            <input placeholder="Confirm Password" id="RoomNo" asp-for=@Model.ConfirmPassword class="form-control" />
+            <span asp-validation-for=@Model.ConfirmPassword class="text-danger"></span>
+        </div>
+        <input class="btn btn-danger btn-sm ms-lg-2" asp-action="Register" asp-controller="Account" type="submit" value="Submit" />
+    </form>
+</div>

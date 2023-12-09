@@ -1,0 +1,67 @@
+﻿@model List<Order>;
+
+    <div class="container mt-5 bg-black">
+    <a class="btn btn-info btn-sm m-3" asp-controller="Data"
+       asp-action="AddNewData" asp-route-id="@ViewBag.id">Add New Order</a>
+    @if (ViewBag.Data == "Empty")
+    {
+        <h1 style="color:white">Data not exist</h1>
+    }
+    else
+    {
+    @foreach (var category in Model)
+        {
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="card-title">@category.Name</h5>
+                    <div class="btn-group" role="group" aria-label="Category Actions">
+                        <a class="btn btn-info btn-sm" asp-controller="Data"
+                           asp-action="EditOrder" asp-route-id="@category.Id">Edit Order</a>
+                        <a class="btn btn-danger btn-sm ms-lg-2" 
+                           href="@Url.Action("DeleteOrder", "Data", 
+                           new { id = category.Id, Urlid = @ViewBag.id })">
+                           Delete Order</a>
+                        <a class="btn btn-success btn-sm ms-lg-2"
+                           href="@Url.Action("AddSubOrder","Data",
+                           new { id = category.Id, Urlid = @ViewBag.id})">Add Order</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th style="width:400px">Name</th>
+                                <th>PlusPrice</th>
+                                <th>Count</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < category.Order_SubTypes.Count; i++)
+                            {
+                                var product = category.Order_SubTypes[i];
+                                <tr>
+                                    <td>@(i + 1)</td>
+                                    <td>@product.Name</td>
+                                    <td>@product.PlusPrice</td>
+                                    <td>@product.Count</td>
+                                    <td>
+                                        <a class="btn btn-info btn-sm" 
+                                           href="@Url.Action("EditSubOrder", "Data",
+                                         new { id = product.Id, Urlid = @ViewBag.id })">
+                                        Edit Data</a>
+                                        <a class="btn btn-danger btn-sm" 
+                                           href="@Url.Action("DeleteSubOrder", "Data",
+                                         new { id = product.Id, Urlid = @ViewBag.id })">Delete Data</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            }
+    }
+    </div>
+

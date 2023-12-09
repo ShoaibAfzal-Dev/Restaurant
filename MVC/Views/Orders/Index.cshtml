@@ -1,0 +1,67 @@
+﻿@model List<MVC.Models.Category>;
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    var Userid = Context.Session.GetString("jti");
+}
+
+<div class="final-page">
+    <p class="user-main-id" style="display:none">@Userid</p>
+    <div style="width:70%;background-color:darkcyan">
+        <img class="info-image" src="~/images/jay-wennington-N_Y88TWmGwA-unsplash.jpg" />
+        <div class="Container">
+            @if (Model == null){
+                <h1>Item does not exist</h1>
+            }
+            @foreach(var p in Model){
+            <h5 class="main-index-heading">@p.Name</h5>
+            <p>@p.Description</p>
+                <div class="menu-data">
+                @foreach (var (o, i) in p.products.
+                Select((product, index) => (product, index)))
+                    {
+                        <p style="display:none">@o.Id</p>
+                                <div class="singl">
+                                <div onclick=
+                                   "showItemDetails('@o.Id',
+                                   '@o.price','@o.Name','@o.Description')" 
+                                   class="single-pd" type="button"
+                                   data-bs-toggle="modal" 
+                                   data-bs-target="#exampleModal2">
+                                   <div > 
+                                     <h6> @o.Name</h6>
+                                     <p>@o.Description</p>
+                                   </div>
+                                   <p>@o.price</p>
+                                </div>
+
+                          </div> 
+                    }
+                </div>
+                    }
+        </div>       
+    </div>
+</div>
+ 
+
+
+<div class="modal fade" id="exampleModal2" 
+    tabindex="-1" role="dialog" 
+    aria-labelledby="exampleModalLabel2" 
+    aria-hidden="true">
+    <div class="modal-dialog" id="mfdsf">
+        <div class="modal-content" id="exam">
+            <h4>Item Details</h4>
+            <div id="itemDetailsContainer"></div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="~/js/showmodel.js"></script>
+    <script>$(document).ready(function () {
+            showItemDetails(itemId,price,Name,description); 
+        }); </script>
+}

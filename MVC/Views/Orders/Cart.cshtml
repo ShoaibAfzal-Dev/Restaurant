@@ -1,0 +1,188 @@
+﻿@model List<CartData>;
+@{
+    var df = 00;
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<div class="Info-Page">
+    <div class="info-details">
+        <div class="Contact-headings">
+            <div class="single-contact">           
+                <div class="Contact-headings-details">
+                <div class="haddssd">
+                    <img class="icon-info" src="~/images/icons8-contact-50.png" />
+                    <h6>Contact</h6>
+                </div>
+                <button class="cancel-btn">Cancel</button>
+            </div>
+            <div class="Add-details">
+                <div class="personal-info">
+                    <div class="personal-name">
+                            <input id="firstName" placeholder="First Name *" />
+                            <input id="lastName" placeholder="Last Name *" />
+                    </div>
+                        <input id="email" type="email" placeholder="E-mail *" />
+                        <input id="telephone"  placeholder="Telephone *" />
+                    <button class="Submit-personal">Save</button>
+                </div>
+                 <button class="details-button">Add details</button>
+                </div>
+
+            </div>
+            <div class="single-contact">
+                <div class="Contact-headings-details">
+                    <div class="haddssd">
+                        <img class="icon-info" src="~/images/icons8-edit-online-order-50.png" />
+                        <h6>ORDERING METHOD</h6>
+                    </div>
+                </div>
+                    <p style="padding:20px 0px 0px 20px">Pickup</p>
+            </div>
+            <div class="single-contact">
+                <div class="Contact-headings-details">
+                    <div class="haddssd">
+                        <img class="icon-info" src="~/images/icons8-delivery-time-50.png" />
+                        <h6>AVAILABLE TIME CHOICE</h6>
+                    </div>
+                    <button class="cancel-btn-time">Cancel</button>
+                </div>
+                <div class="Add-details">
+                    <div class="order-date-info">
+                        <select class="orrdr-time" id="order-day" name="date-time">
+                            <option value="Today">Today</option>
+                            <option value="Tomorrow">Tomorrow</option> 
+                        </select>
+                        <select class="orrdr-time" id="order-time" name="date-time">
+                        </select>
+                       
+                        <button class="Submit-time-personal">Save</button>
+                    </div>
+                <button class="time-button">Set Time</button>
+                </div>
+
+            </div>
+            <div class="single-contact">
+                <div class="Contact-headings-details">
+                    <div class="haddssd">
+                        <img class="icon-info" src="~/images/icons8-payment-50.png" />
+                        <h6>
+                            PAYMENT METHOD
+                        </h6>
+                    </div>
+                    <button class="cancel-btn-payment">Cancel</button>
+                </div>
+                <div class="Add-details">
+                    <div class="order-payment-info">
+
+                        <div class="checkbox-container">
+                            <input type="radio" id="Cash" name="paymentMethod" />
+                            <label for="Cash">Cash</label>
+                        </div>
+
+                        <div class="checkbox-container">
+                            <input type="radio" id="Card" name="paymentMethod" />
+                            <label for="Card">Card at Pickup</label>
+                        </div>
+                        
+
+                        <button class="Submit-payment-personal">Save</button>
+                    </div>
+                    <button class="payment-button">Set Payment</button>
+                </div>
+            </div>
+        </div> 
+        <div class="Cart-details">
+            <div class="Cart-headings">
+                <div style="display:flex;padding-left:10px">   
+                    <h6>Qty</h6>
+                    <h6 style="padding-left:30px">Item</h6>
+                </div>
+                <h6>Price</h6>
+            </div>
+            <div class="cart-data">
+                <div class="cart-data-details">
+                    @if (ViewBag.None == 0)
+                    {
+                        <h4>Cart is empty</h4>
+                    }
+                    else if (!Model.Any())
+                    {
+                        <h4>Cart is empty</h4>
+                    }
+                    else
+                    {
+                        <div style="width:100%">
+                        @foreach(var d in Model)
+                        {
+                                <div class="cart-data-main-data">
+                                <div style="display:flex;padding-left:10px">
+                            <p>@d.quantity x</p>
+                            <p style="padding-left:30px">@d.item</p>
+
+                            </div>
+                                    <div style="display:flex;margin-right: 19px;">
+                            <p>@d.price</p>
+                                        @{
+                                            df =df + @d.price;
+                                        }
+                            <p style="display:none">@df</p>
+                           <button type="button" data-cart-id="@d.id" class="delete-cart-dta">x</button>
+                            </div>
+                            </div>
+                                @foreach (var p in d.sub_details)
+                                {
+                                    <div style="display:flex;padding-left:20px;justify-content:space-between">
+                                     <p style="padding-left:30px">@p.details</p>
+                                        <p style="padding-right:30px">+ @p.price</p>
+                                    </div> 
+                                }
+                                <p>@d.instructions</p>
+                        }
+                          </div>  
+                    }
+                </div>
+                <div class="total-data-details">
+                    <div class="coupon-form">
+                        <input/>
+                        <button class="apply-for-coupon" >Apply</button>
+                        <button class="Cancel-coupon">Cancel</button>
+                    </div>
+                    <h6 class="coupon" style="">
+                    Add coupon code
+                </h6>
+                <div class="total-amount">
+                    <p>Sub-Total</p>
+                        <p>Kr @String.Format("{0:0.00}",df)</p>
+                </div>
+                    <div class="total-amount">
+                        <p>VAT(15% include)</p>
+                        <p>Kr @String.Format("{0:0.00}", df * 0.15)</p>
+                    </div>
+                <div class="total-amount">
+                    <h6>Total</h6>
+                        <h6>Kr @String.Format("{0:0.00}", df) </h6>
+                </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <div class="Place-Order">
+        <p class="paraaa">Place Your Order</p>
+        <button class="Place-Order-button">
+            <p class="plplprs">
+                Total<br/>
+                Kr @String.Format("{0:0.00}",df)
+            </p>
+            <h3 class="plplpl">Place Pickup Order Now</h3>
+        </button>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/cart-contact.js"></script>
+    <script src="~/js/cart-data.js"></script>
+    <script src="~/toastr.js/toastr.min.js"></script>
+}
